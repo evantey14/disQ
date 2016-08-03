@@ -1,11 +1,12 @@
 <!doctype html>
 <html>
   <head>
-    <title>kyeu</title>
+    <title>disQ</title>
     <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 12pt Lato, Arial; color: #EEEEEE; background-color: #8d7d8d; }
+      body { font: 1.5em Lato, Arial; color: #EEEEEE; background-color: #8d7d8d; }
+      p { text-align: center; }
 
       .wrapper { margin: 0 auto; padding: 3rem 0; width:75%; max-width: 600px; }
 
@@ -21,12 +22,17 @@
 
       form { margin: auto; }
 
+      #footer { color: #CCCCCC; }
+      #footer p { font-size: .5em; }
     </style>
   </head>
   <body>
     <div id="head">
-      <h1 id="question">Question?</h1>
+      <div class="wrapper">
+        <h1 id="question">Question?</h1>
+      </div>
     </div>
+    
     <div id="main">
       <div class="wrapper">
         <table id="q">
@@ -36,6 +42,12 @@
         <form action="">
           <input id="enqueue" autocomplete="off" /><button>Add</button>
         </form>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="wrapper">
+        <p>disQ | Evan Tey</p>
       </div>
     </div>
 
