@@ -10,7 +10,11 @@ io.on('connection', function(socket){
   console.log('user connected');
   
   socket.on('enqueue', function(name){
-    io.emit('enqueue', name);
+    io.emit('enqueue', name, Math.floor((Math.random() * 1000) + 1));
+  });
+
+  socket.on('dequeue', function(){
+  	io.emit('dequeue');
   });
   
   socket.on('disconnect', function(){
