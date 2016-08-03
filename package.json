@@ -1,7 +1,11 @@
 {
-  "name": "kyeu",
+  "name": "disQ",
   "version": "0.0.1",
   "description": "a meeting management queue",
+  "main": "index.js",
+  "scripts": {
+  	"start": "node index.js"
+  },
   "dependencies": {
     "express": "^4.14.0",
     "socket.io": "^1.4.8"
