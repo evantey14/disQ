@@ -1,29 +1,64 @@
 <!doctype html>
 <html>
   <head>
-    <title>kyeu</title>
+    <title>disQ</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial;}
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
+      body { font: 1.5em Lato, Arial; color: #EEEEEE; background-color: #8d7d8d; }
+      p { text-align: center; }
+
+      .wrapper { margin: 0 auto; padding: 3rem 0; width:75%; max-width: 600px; }
+
+      table { margin: auto; border-collapse: separate; border-spacing: 0 20px; }
+      td { 
+        margin: 20px auto;
+        padding: 50px 100px; 
+        background-color: #726472;
+        -webkit-box-shadow: 0px 10px 15px -5px rgba(34,34,34,0.5);
+        -moz-box-shadow: 0px 10px 15px -5px rgba(34,34,34,0.5);
+        box-shadow: 0px 10px 15px -5px rgba(34,34,34,0.5);
+      }
+
+      form { position: fixed; top: 1em; right: 1em; }
+      input         {
+        font-size:18px;
+        padding:10px 10px 10px 5px;
+        display:block;
+        width:300px;
+        border:none;
+        border-bottom:1px solid #757575;
+
+      }
+      input:focus     { outline:none; }
+
+      #footer { color: #CCCCCC; }
+      #footer p { font-size: .5em; }
+
     </style>
   </head>
   <body>
+    <div id="head">
+      <div class="wrapper">
+        <h1 id="question">Question</h1>
+      </div>
+      <form action="" style="">
+        <input id="enqueue" autocomplete="off" />
+      </form>
+    </div>
     
-    <h1 id="question">Question</h1>
-    
-    <button id="dequeue">Dequeue</button>
+    <div id="main">
+      <div class="wrapper">
+        <button id="dequeue" class="btn">Dequeue</button>
+        <table id="q"><tbody></tbody></table>
+      </div>
+    </div>
 
-    <ul id="q"></ul>
-    
-    <form action="">
-      <input id="enqueue" autocomplete="off" /><button>Add</button>
-    </form>
+    <div id="footer">
+      <div class="wrapper">
+        <p>disQ | Evan Tey</p>
+      </div>
+    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
@@ -36,15 +71,15 @@
         return false;
       });
       socket.on('enqueue', function(name, id){
-        var new_element = $('<li id=' + id + '>').text(name);
-        $('#q').append(new_element);
+        var new_element = $('<tr>').append($('<td id=' + id + '>').text(name))
+        $('#q > tbody').append(new_element);
       });
 
       $('#dequeue').click(function(){
         socket.emit('dequeue');
       });
       socket.on('dequeue', function(){
-        $('#q :first-child').remove();
+        $('#q tbody tr')[0].remove();
       });
 
     </script>
