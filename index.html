@@ -20,17 +20,31 @@
         box-shadow: 0px 10px 15px -5px rgba(34,34,34,0.5);
       }
 
-      form { margin: auto; }
+      form { position: fixed; top: 1em; right: 1em; }
+      input         {
+        font-size:18px;
+        padding:10px 10px 10px 5px;
+        display:block;
+        width:300px;
+        border:none;
+        border-bottom:1px solid #757575;
+
+      }
+      input:focus     { outline:none; }
 
       #footer { color: #CCCCCC; }
       #footer p { font-size: .5em; }
+
     </style>
   </head>
   <body>
     <div id="head">
       <div class="wrapper">
-        <h1 id="question">Question?</h1>
+        <h1 id="question">Question</h1>
       </div>
+      <form action="" style="">
+        <input id="enqueue" autocomplete="off" />
+      </form>
     </div>
     
     <div id="main">
@@ -39,9 +53,6 @@
           <tr><td>Evan</td></tr>
           <tr><td>Jessy</td></tr>
         </table>
-        <form action="">
-          <input id="enqueue" autocomplete="off" /><button>Add</button>
-        </form>
       </div>
     </div>
 
