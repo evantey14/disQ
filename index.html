@@ -8,16 +8,34 @@
       body { font: 1.5em Lato, Arial; color: #EEEEEE; background-color: #8d7d8d; }
       p { text-align: center; }
 
-      .wrapper { margin: 0 auto; padding: 3rem 0; width:75%; max-width: 600px; }
-
-      table { margin: auto; border-collapse: separate; border-spacing: 0 20px; }
-      td { 
-        margin: 20px auto;
-        padding: 50px 100px; 
-        background-color: #726472;
+      .wrapper { margin: 0 auto; padding: 1rem 0; width:75%; max-width: 600px; }
+      .box { 
+        text-align: center;
         -webkit-box-shadow: 0px 10px 15px -5px rgba(34,34,34,0.5);
         -moz-box-shadow: 0px 10px 15px -5px rgba(34,34,34,0.5);
         box-shadow: 0px 10px 15px -5px rgba(34,34,34,0.5);
+      }
+
+      #dq {
+        margin: auto;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #d23f31;
+        transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        transition-delay: 0.2s;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+      }
+      #dq:active {
+        box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+        transition-delay: 0s;
+      }
+
+      table { margin: auto; border-collapse: separate; border-spacing: 0 20px; }
+      #q .box {
+        margin: 20px auto;
+        padding: 50px 100px; 
+        background-color: #726472;
       }
 
       form { position: fixed; top: 1em; right: 1em; }
@@ -30,7 +48,7 @@
         border-bottom:1px solid #757575;
 
       }
-      input:focus     { outline:none; }
+      input:focus { outline:none; }
 
       #footer { color: #CCCCCC; }
       #footer p { font-size: .5em; }
@@ -49,7 +67,7 @@
     
     <div id="main">
       <div class="wrapper">
-        <button id="dequeue" class="btn">Dequeue</button>
+        <div id="dq""></div>
         <table id="q"><tbody></tbody></table>
       </div>
     </div>
@@ -72,15 +90,15 @@
         $('#enqueue').val('');
         return false;
       });
-      
-      $('#dequeue').click(function(){
+
+      $('#dq').click(function(){
         socket.emit('dequeue');
       });
 
       socket.on('updateQ', function(q){
          $('#q > tbody').empty();
          q.forEach(function(el) {
-            var new_el = $('<tr>').append($('<td>').text(el));
+            var new_el = $('<tr>').append($('<td class="box">').text(el));
             $('#q > tbody').append(new_el);
          }); 
       });
