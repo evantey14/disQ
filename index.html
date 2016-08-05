@@ -64,24 +64,26 @@
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       var socket = io();
-      
+
+      socket.emit('init');
+
       $('form').submit(function(){
         socket.emit('enqueue', $('#enqueue').val());
         $('#enqueue').val('');
         return false;
       });
-      socket.on('enqueue', function(name, id){
-        var new_element = $('<tr>').append($('<td id=' + id + '>').text(name))
-        $('#q > tbody').append(new_element);
-      });
-
+      
       $('#dequeue').click(function(){
         socket.emit('dequeue');
       });
-      socket.on('dequeue', function(){
-        $('#q tbody tr')[0].remove();
-      });
 
+      socket.on('updateQ', function(q){
+         $('#q > tbody').empty();
+         q.forEach(function(el) {
+            var new_el = $('<tr>').append($('<td>').text(el));
+            $('#q > tbody').append(new_el);
+         }); 
+      });
     </script>
   </body>
 </html>
