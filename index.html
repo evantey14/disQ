@@ -38,17 +38,22 @@
         background-color: #726472;
       }
 
-      #enqueue { position: fixed; top: 1em; right: 1em; }
-      input {
-        font-size:18px;
-        padding:10px 10px 10px 5px;
-        display:block;
-        width:300px;
-        border:none;
-        border-bottom:1px solid #757575;
+      #enqueue { position: fixed; top: 1em; right: 1em; width: 15%;}
 
+      input {
+        width: 100%;
+        border: none;
+        padding: 10px 0;
+        border-bottom: solid 3px white;
+        background: none;
+        font: 1em Lato, Arial;
+        color: #EEEEEE;
       }
-      input:focus { outline:none; }
+      input:focus, input:valid {
+       box-shadow: none;
+       outline: none;
+       background-position: 0 0;
+      }
 
       #footer { color: #CCCCCC; }
       #footer p { font-size: .5em; }
@@ -59,11 +64,13 @@
     <div id="head">
       <div class="wrapper">
         <form id="question">
-          <input autocomplete="off" />
+          <input type="text" autocomplete="off" />
+          <span class="bar"></span>
         </form>
       </div>
       <form action="" style="" id="enqueue">
-        <input id="name" autocomplete="off" />
+        <input id="name" type="text" autocomplete="off" />
+        <span class="bar"></span>
       </form>
     </div>
     
