@@ -69,6 +69,13 @@
 
       socket.emit('init');
 
+       $('#question').submit(function(){
+          socket.emit('setQuestion', $('#question input').val());
+       });
+       socket.on('updateQuestion', function(question){
+          $('#question input').val(question);
+       });
+
       $('#enqueue').submit(function(){
         socket.emit('enqueue', $('#name').val());
         $('#name').val('');
