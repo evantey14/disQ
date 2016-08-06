@@ -16,20 +16,22 @@
         box-shadow: 0px 10px 15px -5px rgba(34,34,34,0.5);
       }
 
-      #dq {
+
+      .bubble {
         margin: auto;
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background-color: #d23f31;
         transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         transition-delay: 0.2s;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
       }
-      #dq:active {
+      .bubble:active {
         box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
         transition-delay: 0s;
       }
+      #dq { background-color: #d23f31; }
+      #enq { background-color: green; margin-right: 0;}
 
       table { margin: auto; border-collapse: separate; border-spacing: 0 20px; }
       #q .box {
@@ -40,6 +42,7 @@
 
       #enqueue { position: fixed; top: 1em; right: 1em; width: 15%;}
 
+      #question { float: left; width: 90%;}
       input {
         width: 100%;
         border: none;
@@ -65,18 +68,16 @@
       <div class="wrapper">
         <form id="question">
           <input type="text" autocomplete="off" />
-          <span class="bar"></span>
         </form>
+        <div id="enq" class="bubble"></div>
       </div>
-      <form action="" style="" id="enqueue">
-        <input id="name" type="text" autocomplete="off" />
-        <span class="bar"></span>
-      </form>
+      
+      
     </div>
     
     <div id="main">
       <div class="wrapper">
-        <div id="dq""></div>
+        <div id="dq" class="bubble"></div>
         <table id="q"><tbody></tbody></table>
       </div>
     </div>
@@ -105,10 +106,8 @@
           $('#question input').val(question);
        });
 
-      $('#enqueue').submit(function(){
-        socket.emit('enqueue', $('#name').val());
-        $('#name').val('');
-        return false;
+      $('#enq').click(function(){
+        socket.emit('enqueue');
       });
 
       $('#dq').click(function(){

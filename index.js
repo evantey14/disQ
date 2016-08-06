@@ -30,11 +30,10 @@ io.on('connection', function(socket) {
   socket.on('setQuestion', function(new_question){
     question = new_question;
     io.emit('updateQuestion', question);
-    console.log(socket.username);
   });
 
-  socket.on('enqueue', function(name){
-    q.enqueue(name);
+  socket.on('enqueue', function(){
+    q.enqueue(socket.username);
     io.emit('updateQ', q.q);
   });
 
