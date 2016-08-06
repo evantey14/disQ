@@ -92,10 +92,14 @@
     <script>
       var socket = io();
 
-      socket.emit('init');
+      socket.on('connect', function(){
+        socket.emit('init');
+        socket.emit('addUser', prompt("What's your name?"));
+      });
 
        $('#question').submit(function(){
           socket.emit('setQuestion', $('#question input').val());
+          return false;
        });
        socket.on('updateQuestion', function(question){
           $('#question input').val(question);
