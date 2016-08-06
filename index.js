@@ -4,6 +4,7 @@ var io = require('socket.io')(http);
 
 var qModel = require('./q');
 var q = null;
+var question = 'Question';
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
@@ -17,8 +18,14 @@ io.on('connection', function(socket) {
       q.init();
     }
     io.emit('updateQ', q.q);
+    io.emit('updateQuestion', question);
   });
   
+  socket.on('setQuestion', function(new_question){
+    question = new_question;
+    io.emit('updateQuestion', question);
+  });
+
   socket.on('enqueue', function(name){
     q.enqueue(name);
     io.emit('updateQ', q.q);

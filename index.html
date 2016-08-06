@@ -38,8 +38,8 @@
         background-color: #726472;
       }
 
-      form { position: fixed; top: 1em; right: 1em; }
-      input         {
+      #enqueue { position: fixed; top: 1em; right: 1em; }
+      input {
         font-size:18px;
         padding:10px 10px 10px 5px;
         display:block;
@@ -58,10 +58,12 @@
   <body>
     <div id="head">
       <div class="wrapper">
-        <h1 id="question">Question</h1>
+        <form id="question">
+          <input autocomplete="off" />
+        </form>
       </div>
-      <form action="" style="">
-        <input id="enqueue" autocomplete="off" />
+      <form action="" style="" id="enqueue">
+        <input id="name" autocomplete="off" />
       </form>
     </div>
     
@@ -85,9 +87,16 @@
 
       socket.emit('init');
 
-      $('form').submit(function(){
-        socket.emit('enqueue', $('#enqueue').val());
-        $('#enqueue').val('');
+       $('#question').submit(function(){
+          socket.emit('setQuestion', $('#question input').val());
+       });
+       socket.on('updateQuestion', function(question){
+          $('#question input').val(question);
+       });
+
+      $('#enqueue').submit(function(){
+        socket.emit('enqueue', $('#name').val());
+        $('#name').val('');
         return false;
       });
 
